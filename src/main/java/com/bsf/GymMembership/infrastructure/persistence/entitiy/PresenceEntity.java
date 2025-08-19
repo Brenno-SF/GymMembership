@@ -1,4 +1,4 @@
-package com.bsf.GymMembership.infrastructure.persistence;
+package com.bsf.GymMembership.infrastructure.persistence.entitiy;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,5 +35,4 @@ public class PresenceEntity {
     @Column(name = "register", nullable = false)
     private LocalDate register;
 
-    // Getters and Setters
 }

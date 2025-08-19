@@ -1,6 +1,6 @@
 package com.bsf.GymMembership.core.usecases;
 
-import com.bsf.GymMembership.core.entities.Member;
+import com.bsf.GymMembership.core.entity.Member;
 
 public class CreateMemberCaseImpl implements CreateMemberCase{
     @Override

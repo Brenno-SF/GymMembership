@@ -1,4 +1,4 @@
-package com.bsf.GymMembership.infrastructure.persistence;
+package com.bsf.GymMembership.infrastructure.persistence.entitiy;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

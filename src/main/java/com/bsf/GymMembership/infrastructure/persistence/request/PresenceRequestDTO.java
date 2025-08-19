@@ -1,9 +1,8 @@
-package com.bsf.GymMembership.core.entities;
+package com.bsf.GymMembership.infrastructure.persistence.request;
 
 import java.time.LocalDate;
 
-public record Presence(
-        String presenceId,
+public record PresenceRequestDTO(
         String memberId,
         String classId,
         Boolean presence,

@@ -1,4 +1,4 @@
-package com.bsf.GymMembership.core.entities;
+package com.bsf.GymMembership.core.entity;
 
 import java.time.LocalDateTime;
 
@@ -7,5 +7,4 @@ public record Class(
         String name,
         String description,
         LocalDateTime dateHour
-) {
-}
+){}

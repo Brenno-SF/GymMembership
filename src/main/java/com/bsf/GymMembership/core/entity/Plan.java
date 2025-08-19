@@ -1,8 +1,8 @@
-package com.bsf.GymMembership.core.entities;
+package com.bsf.GymMembership.core.entity;
 
 public record Plan(
         String planId,
-        String Name,
+        String name,
         String description,
         Integer maxCapacity,
         Integer durationMonth
