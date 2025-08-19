@@ -20,7 +20,7 @@ public class ClassEntity {
     @Id
     @Column(name = "class_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID classId;
+    private String classId;
 
     @Column(name = "name_class", nullable = false, length = 255)
     private String nameClass;

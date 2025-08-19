@@ -19,7 +19,7 @@ public class PresenceEntity {
     @Id
     @Column(name = "presence_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID presenceId;
+    private String presenceId;
 
     @ManyToOne
     @JoinColumn(name = "member_id_fk", nullable = false)

@@ -20,10 +20,13 @@ public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "member_id", nullable = false)
-    private UUID memberId;
+    private String memberId;
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;
+
+    @Column(name = "email", nullable = false, length = 255)
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "plan_id", nullable = false)
