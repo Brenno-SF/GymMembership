@@ -20,7 +20,7 @@ public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "member_id", nullable = false)
-    private String memberId;
+    private UUID memberId;
 
     @Column(name = "name", nullable = false, length = 255)
     private String name;

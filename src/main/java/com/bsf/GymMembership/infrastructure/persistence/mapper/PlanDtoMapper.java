@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlanDtoMapper {
 
-    public static Plan toEntity(PlanDTO dto) {
+    public Plan toEntity(PlanDTO dto) {
         return new Plan(
                 dto.planId(),
                 dto.name(),
@@ -16,7 +16,7 @@ public class PlanDtoMapper {
         );
     }
 
-    public static PlanDTO toDto(Plan entity) {
+    public PlanDTO toDto(Plan entity) {
         return new PlanDTO(
                 entity.planId(),
                 entity.name(),

@@ -12,6 +12,6 @@ public class CreatePlanCaseImpl implements CreatePlanCase{
 
     @Override
     public Plan execute(Plan plan) {
-        return null;
+        return planGateway.createPlan(plan);
     }
 }

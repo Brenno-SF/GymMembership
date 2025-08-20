@@ -1,12 +1,13 @@
 package com.bsf.GymMembership.infrastructure.persistence.dto;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record MemberDTO(
-        String memberId,
+        UUID memberId,
         String name,
         String email,
-        String planId,
+        UUID planId,
         LocalDate startDate,
         LocalDate endDate,
         Boolean active

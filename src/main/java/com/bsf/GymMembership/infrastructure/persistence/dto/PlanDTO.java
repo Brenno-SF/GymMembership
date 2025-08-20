@@ -1,7 +1,9 @@
 package com.bsf.GymMembership.infrastructure.persistence.dto;
 
+import java.util.UUID;
+
 public record PlanDTO(
-        String planId,
+        UUID planId,
         String name,
         String description,
         Integer maxCapacity,

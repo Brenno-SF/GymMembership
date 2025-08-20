@@ -1,11 +1,12 @@
 package com.bsf.GymMembership.infrastructure.persistence.dto;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record PresenceDTO(
-        String presenceId,
-        String memberId,
-        String classId,
+        UUID presenceId,
+        UUID memberId,
+        UUID classId,
         Boolean presence,
         LocalDate register
 ) {

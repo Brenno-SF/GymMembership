@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "plan_tb")
 @Getter
@@ -17,7 +19,7 @@ public class PlanEntity {
     @Id
     @Column(name = "plan_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String planId;
+    private UUID planId;
 
     @Column(name = "name_plan", nullable = false, length = 255)
     private String namePlan;

@@ -1,7 +1,9 @@
 package com.bsf.GymMembership.core.entity;
 
+import java.util.UUID;
+
 public record Plan(
-        String planId,
+        UUID planId,
         String name,
         String description,
         Integer maxCapacity,
