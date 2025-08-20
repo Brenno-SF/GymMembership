@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class MemberMapper {
+public class MemberDtoMapper {
     public static Member toEntity(MemberDTO dto){
         return new Member(
                 dto.memberId(),

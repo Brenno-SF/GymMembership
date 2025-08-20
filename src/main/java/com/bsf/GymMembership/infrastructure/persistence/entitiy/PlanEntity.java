@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "plan_tb")
 @Getter
@@ -32,4 +30,5 @@ public class PlanEntity {
 
     @Column(name = "duration_month", nullable = false)
     private Integer durationMonth;
+
 }

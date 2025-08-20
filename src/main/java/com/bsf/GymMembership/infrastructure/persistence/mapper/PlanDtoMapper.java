@@ -4,7 +4,7 @@ import com.bsf.GymMembership.infrastructure.persistence.dto.PlanDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PlanMapper {
+public class PlanDtoMapper {
 
     public static Plan toEntity(PlanDTO dto) {
         return new Plan(

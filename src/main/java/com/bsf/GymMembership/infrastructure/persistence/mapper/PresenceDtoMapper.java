@@ -5,7 +5,7 @@ import com.bsf.GymMembership.infrastructure.persistence.dto.PresenceDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PresenceMapper {
+public class PresenceDtoMapper {
 
     public static Presence toEntity(PresenceDTO dto) {
         return new Presence(

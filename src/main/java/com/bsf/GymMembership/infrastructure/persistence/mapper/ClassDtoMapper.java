@@ -4,7 +4,7 @@ import com.bsf.GymMembership.infrastructure.persistence.dto.ClassDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClassMapper {
+public class ClassDtoMapper {
     public static Class toEntity(ClassDTO dto) {
         return new Class(
                 dto.classId(),
