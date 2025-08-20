@@ -7,6 +7,9 @@ import com.bsf.GymMembership.infrastructure.persistence.mapper.PlanEntityMapper;
 import com.bsf.GymMembership.infrastructure.persistence.repository.PlanRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class PlanRepositoryGateway implements PlanGateway {
     private final PlanRepository planRepository;
@@ -22,5 +25,13 @@ public class PlanRepositoryGateway implements PlanGateway {
         PlanEntity entity = planEntityMapper.toEntity(plan);
         PlanEntity newPlan = planRepository.save(entity);
         return planEntityMapper.toDomain(newPlan);
+    }
+
+    @Override
+    public List<Plan> listPlans() {
+        return  planRepository.findAll()
+                .stream()
+                .map(planEntityMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }

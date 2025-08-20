@@ -1,4 +1,4 @@
-package com.bsf.GymMembership.core.usecases;
+package com.bsf.GymMembership.core.usecases.plan;
 
 import com.bsf.GymMembership.core.entity.Plan;
 import com.bsf.GymMembership.core.gateway.PlanGateway;
