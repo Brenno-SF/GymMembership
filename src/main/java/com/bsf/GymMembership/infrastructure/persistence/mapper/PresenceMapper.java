@@ -1,29 +1,29 @@
 package com.bsf.GymMembership.infrastructure.persistence.mapper;
 
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.ClassEntity;
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.MemberEntity;
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.PresenceEntity;
-import com.bsf.GymMembership.infrastructure.persistence.request.PresenceRequestDTO;
-import com.bsf.GymMembership.infrastructure.persistence.response.PresenceResponseDTO;
+import com.bsf.GymMembership.core.entity.Presence;
+import com.bsf.GymMembership.infrastructure.persistence.dto.PresenceDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PresenceMapper {
 
-    public static PresenceEntity toEntity(PresenceRequestDTO dto, MemberEntity member, ClassEntity classEntity) {
-        PresenceEntity presence = new PresenceEntity();
-        presence.setMember(member);
-        presence.setGymClass(classEntity);
-        presence.setPresence(dto.presence());
-        presence.setRegister(dto.register());
-        return presence;
+    public static Presence toEntity(PresenceDTO dto) {
+        return new Presence(
+                dto.presenceId(),
+                dto.memberId(),
+                dto.classId(),
+                dto.presence(),
+                dto.register()
+        );
     }
 
-    public static PresenceResponseDTO toDto(PresenceEntity entity) {
-        return new PresenceResponseDTO(
-                entity.getPresenceId(),
-                entity.getMember().getMemberId(),
-                entity.getGymClass().getClassId(),
-                entity.getPresence(),
-                entity.getRegister()
+    public static PresenceDTO toDto(Presence entity) {
+        return new PresenceDTO(
+                entity.presenceId(),
+                entity.memberId(),
+                entity.classId(),
+                entity.presence(),
+                entity.register()
         );
     }
 }

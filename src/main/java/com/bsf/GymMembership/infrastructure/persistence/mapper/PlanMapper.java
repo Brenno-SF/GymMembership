@@ -1,26 +1,28 @@
 package com.bsf.GymMembership.infrastructure.persistence.mapper;
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.PlanEntity;
-import com.bsf.GymMembership.infrastructure.persistence.request.PlanRequestDTO;
-import com.bsf.GymMembership.infrastructure.persistence.response.PlanResponseDTO;
+import com.bsf.GymMembership.core.entity.Plan;
+import com.bsf.GymMembership.infrastructure.persistence.dto.PlanDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PlanMapper {
 
-    public static PlanEntity toEntity(PlanRequestDTO dto) {
-        PlanEntity plan = new PlanEntity();
-        plan.setNamePlan(dto.name());
-        plan.setDescriptionPlan(dto.description());
-        plan.setMaxCapacity(dto.maxCapacity());
-        plan.setDurationMonth(dto.durationMonth());
-        return plan;
+    public static Plan toEntity(PlanDTO dto) {
+        return new Plan(
+                dto.planId(),
+                dto.name(),
+                dto.description(),
+                dto.maxCapacity(),
+                dto.durationMonth()
+        );
     }
 
-    public static PlanResponseDTO toDto(PlanEntity entity) {
-        return new PlanResponseDTO(
-                entity.getPlanId(),
-                entity.getNamePlan(),
-                entity.getDescriptionPlan(),
-                entity.getMaxCapacity(),
-                entity.getDurationMonth()
+    public static PlanDTO toDto(Plan entity) {
+        return new PlanDTO(
+                entity.planId(),
+                entity.name(),
+                entity.description(),
+                entity.maxCapacity(),
+                entity.durationMonth()
         );
     }
 }

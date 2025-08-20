@@ -1,8 +1,9 @@
-package com.bsf.GymMembership.infrastructure.persistence.request;
+package com.bsf.GymMembership.infrastructure.persistence.dto;
 
 import java.time.LocalDate;
 
-public record MemberRequestDTO(
+public record MemberDTO(
+        String memberId,
         String name,
         String email,
         String planId,

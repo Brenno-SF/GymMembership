@@ -1,31 +1,32 @@
 package com.bsf.GymMembership.infrastructure.persistence.mapper;
 
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.MemberEntity;
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.PlanEntity;
-import com.bsf.GymMembership.infrastructure.persistence.request.MemberRequestDTO;
-import com.bsf.GymMembership.infrastructure.persistence.response.MemberResponseDTO;
+import com.bsf.GymMembership.core.entity.Member;
+import com.bsf.GymMembership.infrastructure.persistence.dto.MemberDTO;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class MemberMapper {
-    public static MemberEntity toEntity(MemberRequestDTO dto, PlanEntity plan){
-        MemberEntity member = new MemberEntity();
-        member.setName(dto.name());
-        member.setEmail(dto.email());
-        member.setActive(dto.active());
-        member.setStartDate(dto.startDate());
-        member.setEndDate(dto.endDate());
-        member.setPlan(plan);
-
-        return member;
+    public static Member toEntity(MemberDTO dto){
+        return new Member(
+                dto.memberId(),
+                dto.name(),
+                dto.email(),
+                dto.planId(),
+                dto.startDate(),
+                dto.endDate(),
+                dto.active()
+        );
     }
-    public static MemberResponseDTO  toDto(MemberEntity entity){
-        return new MemberResponseDTO(
-                entity.getMemberId(),
-                entity.getName(),
-                entity.getEmail(),
-                entity.getPlan().getPlanId(),
-                entity.getStartDate(),
-                entity.getEndDate(),
-                entity.getActive()
+    public static MemberDTO toDto(Member entity){
+        return new MemberDTO(
+                entity.memberId(),
+                entity.name(),
+                entity.email(),
+                entity.planId(),
+                entity.startDate(),
+                entity.endDate(),
+                entity.active()
         );
     }
 }

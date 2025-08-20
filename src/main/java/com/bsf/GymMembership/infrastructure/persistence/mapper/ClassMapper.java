@@ -1,23 +1,25 @@
 package com.bsf.GymMembership.infrastructure.persistence.mapper;
-import com.bsf.GymMembership.infrastructure.persistence.entitiy.ClassEntity;
-import com.bsf.GymMembership.infrastructure.persistence.request.ClassRequestDTO;
-import com.bsf.GymMembership.infrastructure.persistence.response.ClassResponseDTO;
+import com.bsf.GymMembership.core.entity.Class;
+import com.bsf.GymMembership.infrastructure.persistence.dto.ClassDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClassMapper {
-    public static ClassEntity toEntity(ClassRequestDTO dto) {
-        ClassEntity classEntity = new ClassEntity();
-        classEntity.setNameClass(dto.name());
-        classEntity.setDescriptionClass(dto.description());
-        classEntity.setDateHour(dto.dateHour());
-        return classEntity;
+    public static Class toEntity(ClassDTO dto) {
+        return new Class(
+                dto.classId(),
+                dto.name(),
+                dto.description(),
+                dto.dateHour()
+        );
     }
 
-    public static ClassResponseDTO toDto(ClassEntity entity) {
-        return new ClassResponseDTO(
-                entity.getClassId(),
-                entity.getNameClass(),
-                entity.getDescriptionClass(),
-                entity.getDateHour()
+    public static ClassDTO toDto(Class entity) {
+        return new ClassDTO(
+                entity.classId(),
+                entity.name(),
+                entity.description(),
+                entity.dateHour()
         );
     }
 }

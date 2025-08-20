@@ -1,8 +1,9 @@
-package com.bsf.GymMembership.infrastructure.persistence.request;
+package com.bsf.GymMembership.infrastructure.persistence.dto;
 
 import java.time.LocalDateTime;
 
-public record ClassRequestDTO(
+public record ClassDTO(
+        String classId,
         String name,
         String description,
         LocalDateTime dateHour
