@@ -2,12 +2,14 @@ package com.bsf.GymMembership.infrastructure.gateway;
 
 import com.bsf.GymMembership.core.entity.Plan;
 import com.bsf.GymMembership.core.gateway.PlanGateway;
+import com.bsf.GymMembership.infrastructure.exception.NotFoundException;
 import com.bsf.GymMembership.infrastructure.persistence.entitiy.PlanEntity;
 import com.bsf.GymMembership.infrastructure.persistence.mapper.PlanEntityMapper;
 import com.bsf.GymMembership.infrastructure.persistence.repository.PlanRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -33,5 +35,11 @@ public class PlanRepositoryGateway implements PlanGateway {
                 .stream()
                 .map(planEntityMapper::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Plan> listByPlan(String plan) {
+        return planRepository.findByNamePlan(plan)
+                .map(planEntityMapper::toDomain);
     }
 }
