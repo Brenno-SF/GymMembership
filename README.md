@@ -71,7 +71,7 @@ Layers and responsibilities:
 
 - Java 17, Spring Boot 3 (Web, Validation), Spring Data JPA
 - PostgreSQL, Flyway
-- Lombok (boilerplate), MapStruct (optional for mappers)
+- Lombok (boilerplate)
 - Testing: JUnit 5 + Mockito
 
 ---
@@ -251,7 +251,6 @@ Base: `/gym/v1`
 
 - **Unit (core/application)**: isolated business rules.
 - **Slice Tests (web/data)**: `@WebMvcTest` for controllers; `@DataJpaTest` for repositories.
-- **Integration**: full context with in-memory DB or Testcontainers.
 
 Examples:
 - Active plan validation.
@@ -264,7 +263,7 @@ Examples:
 
 - Bean Validation (`@Valid`) in DTOs.
 - Exception handling with `@ControllerAdvice` + **RFC 7807** (Problem Details).
-- (Optional) **JWT** + RBAC for administrative endpoints.
+- **JWT** + RBAC for administrative endpoints.
 
 ---
 
@@ -275,28 +274,9 @@ Examples:
 
 ---
 
-## 🗺️ Roadmap
-
-- [ ] **Enrollment** feature (prior registration) separate from attendance.
-- [ ] Per-class capacity (field `capacityMax` in `class_tb`).
-- [ ] Email notifications for attendance confirmation/cancellation.
-- [ ] Plan payment and upgrade.
-- [ ] Attendance reports over a period.
-
----
 
 ## 📄 License
 
 Distributed under the **MIT** license. Feel free to use/modify.
 
 ---
-
-## 📚 References
-
-- Clean Architecture — layer separation and dependencies.
-- Java Time API (`LocalDate`, `LocalDateTime`) for dates.
-- Flyway — schema versioning.
-
----
-
-> Questions or improvements? Open an issue or reach out! 😉
