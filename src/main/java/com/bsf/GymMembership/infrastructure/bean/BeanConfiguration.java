@@ -20,4 +20,13 @@ public class BeanConfiguration {
     public ListByPlanCase listByPlanCase(PlanGateway planGateway){
         return new ListByPlanCaseImpl(planGateway);
     }
+    @Bean
+    public UpdatePlanCase updatePlanCase(PlanGateway planGateway){
+        return new UpdatePlanCaseImpl(planGateway);
+    }
+    @Bean
+    public DeletePlanCase deletePlanCase(PlanGateway planGateway){
+        return new DeletePlanCaseImpl(planGateway) {
+        };
+    }
 }

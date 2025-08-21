@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -41,5 +42,28 @@ public class PlanRepositoryGateway implements PlanGateway {
     public Optional<Plan> listByPlan(String plan) {
         return planRepository.findByNamePlan(plan)
                 .map(planEntityMapper::toDomain);
+    }
+
+    @Override
+    public Plan updatePlanById(UUID planId, Plan plan) {
+        PlanEntity planEntity =  planRepository.findById(planId)
+                .orElseThrow(()-> new NotFoundException("Plan not Found"));
+
+        planEntity.setNamePlan(plan.name());
+        planEntity.setDescriptionPlan(plan.description());
+        planEntity.setDurationMonth(plan.durationMonth());
+        planEntity.setMaxCapacity(plan.maxCapacity());
+
+        PlanEntity updatedPlanEntity =  planRepository.save(planEntity);
+
+        return planEntityMapper.toDomain(updatedPlanEntity);
+    }
+
+    @Override
+    public void DeletePlanById(UUID planId) {
+        PlanEntity planEntity =  planRepository.findById(planId)
+                .orElseThrow(()-> new NotFoundException("Plan not Found"));
+
+        planRepository.delete(planEntity);
     }
 }
