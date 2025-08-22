@@ -12,6 +12,8 @@ import com.bsf.GymMembership.infrastructure.persistence.repository.MemberReposit
 import com.bsf.GymMembership.infrastructure.persistence.repository.PlanRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class MemberRepositoryGateway implements MemberGateway {
     private final MemberRepository memberRepository;
@@ -22,7 +24,8 @@ public class MemberRepositoryGateway implements MemberGateway {
         this.memberRepository = memberRepository;
         this.planRepository = planRepository;
         this.memberEntityMapper = memberEntityMapper;
-        }
+    }
+
 
     @Override
     public Member createMember(Member member) {
@@ -31,9 +34,28 @@ public class MemberRepositoryGateway implements MemberGateway {
         );
 
         MemberEntity memberEntity = memberEntityMapper.toEntity(member, planEntity);
-        MemberEntity newMemberEntity=  memberRepository.save(memberEntity);
+        MemberEntity newMemberEntity =  memberRepository.save(memberEntity);
 
         return memberEntityMapper.toDomain(newMemberEntity);
+    }
+
+    @Override
+    public Member updateMember(UUID memberId, Member member) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(
+                ()-> new NotFoundException("Member Not Found")
+        );
+        PlanEntity planEntity = planRepository.findById(member.planId()).orElseThrow(
+                ()-> new NotFoundException("Plan Not Found")
+        );
+        memberEntity.setName(member.name());
+        memberEntity.setPlan(planEntity);
+        memberEntity.setActive(member.active());
+        memberEntity.setStartDate(member.startDate());
+        memberEntity.setEndDate(member.endDate());
+        memberEntity.setEmail(member.email());
+
+        MemberEntity updatedMemberEntity =  memberRepository.save(memberEntity);
+        return memberEntityMapper.toDomain(updatedMemberEntity);
     }
 }
 
