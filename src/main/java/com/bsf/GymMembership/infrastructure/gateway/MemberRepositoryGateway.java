@@ -57,6 +57,22 @@ public class MemberRepositoryGateway implements MemberGateway {
         MemberEntity updatedMemberEntity =  memberRepository.save(memberEntity);
         return memberEntityMapper.toDomain(updatedMemberEntity);
     }
+
+    @Override
+    public void deleteMember(UUID memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(
+                ()-> new NotFoundException("Member Not Found")
+        );
+        memberRepository.deleteById(memberId);
+    }
+
+    @Override
+    public Member listMember(UUID memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(()-> new NotFoundException("Member Not Found"));
+
+        return memberEntityMapper.toDomain(memberEntity);
+    }
 }
 
 

@@ -3,9 +3,10 @@ package com.bsf.GymMembership.infrastructure.presentation;
 import com.bsf.GymMembership.core.entity.Member;
 import com.bsf.GymMembership.core.entity.Plan;
 import com.bsf.GymMembership.core.usecases.member.CreateMemberCase;
+import com.bsf.GymMembership.core.usecases.member.DeleteMemberCase;
+import com.bsf.GymMembership.core.usecases.member.ListMemberCase;
 import com.bsf.GymMembership.core.usecases.member.UpdateMemberCase;
 import com.bsf.GymMembership.infrastructure.persistence.dto.MemberDTO;
-import com.bsf.GymMembership.infrastructure.persistence.dto.PlanDTO;
 import com.bsf.GymMembership.infrastructure.persistence.mapper.MemberDtoMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,15 @@ import java.util.UUID;
 public class MemberController {
     private final CreateMemberCase createMemberCase;
     private final UpdateMemberCase updateMemberCase;
+    private final DeleteMemberCase deleteMemberCase;
+    private final ListMemberCase listMemberCase;
     private final MemberDtoMapper mapper;
 
-    public MemberController(CreateMemberCase createMemberCase, UpdateMemberCase updateMemberCase, MemberDtoMapper mapper) {
+    public MemberController(CreateMemberCase createMemberCase, UpdateMemberCase updateMemberCase, DeleteMemberCase deleteMemberCase, ListMemberCase listMemberCase, MemberDtoMapper mapper) {
         this.createMemberCase = createMemberCase;
         this.updateMemberCase = updateMemberCase;
+        this.deleteMemberCase = deleteMemberCase;
+        this.listMemberCase = listMemberCase;
         this.mapper = mapper;
     }
     @PostMapping("create")
@@ -34,6 +39,15 @@ public class MemberController {
         Member member = mapper.toEntity(memberDTO);
 
         return mapper.toDto(updateMemberCase.execute(memberId, member));
+    }
+    @DeleteMapping("delete/{memberId}")
+    public Void deleteMember(@PathVariable UUID memberId){
+        deleteMemberCase.execute(memberId);
+        return null;
+    }
+    @GetMapping("list/{memberId}")
+    public MemberDTO listMemberById(@PathVariable UUID memberId){
+        return mapper.toDto(listMemberCase.execute(memberId));
     }
 
 }
