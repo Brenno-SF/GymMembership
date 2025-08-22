@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberDtoMapper {
-    public static Member toEntity(MemberDTO dto){
+    public Member toEntity(MemberDTO dto){
         return new Member(
                 dto.memberId(),
                 dto.name(),
@@ -18,7 +18,7 @@ public class MemberDtoMapper {
                 dto.active()
         );
     }
-    public static MemberDTO toDto(Member entity){
+    public MemberDTO toDto(Member entity){
         return new MemberDTO(
                 entity.memberId(),
                 entity.name(),

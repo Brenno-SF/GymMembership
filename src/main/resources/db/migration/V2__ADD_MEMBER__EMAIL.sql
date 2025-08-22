@@ -1,0 +1,1 @@
+ALTER TABLE member_tb add column email varchar(100) not null unique;

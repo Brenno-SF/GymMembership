@@ -1,5 +1,7 @@
 package com.bsf.GymMembership.core.gateway;
 
-public interface MemberGateway {
+import com.bsf.GymMembership.core.entity.Member;
 
+public interface MemberGateway {
+    public Member createMember(Member member);
 }

@@ -1,6 +1,9 @@
 package com.bsf.GymMembership.infrastructure.bean;
 
+import com.bsf.GymMembership.core.gateway.MemberGateway;
 import com.bsf.GymMembership.core.gateway.PlanGateway;
+import com.bsf.GymMembership.core.usecases.member.CreateMemberCase;
+import com.bsf.GymMembership.core.usecases.member.CreateMemberCaseImpl;
 import com.bsf.GymMembership.core.usecases.plan.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +30,12 @@ public class BeanConfiguration {
     @Bean
     public DeletePlanCase deletePlanCase(PlanGateway planGateway){
         return new DeletePlanCaseImpl(planGateway) {
+        };
+    }
+
+    @Bean
+    public CreateMemberCase createMemberCase(MemberGateway memberGateway){
+        return new CreateMemberCaseImpl(memberGateway) {
         };
     }
 }

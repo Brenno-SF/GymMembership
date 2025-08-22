@@ -22,7 +22,7 @@ public class MemberEntity {
     @Column(name = "member_id", nullable = false)
     private UUID memberId;
 
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "name_member", nullable = false, length = 255)
     private String name;
 
     @Column(name = "email", nullable = false, length = 255)
