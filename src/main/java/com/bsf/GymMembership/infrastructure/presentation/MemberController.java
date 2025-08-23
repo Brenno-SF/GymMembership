@@ -2,15 +2,14 @@ package com.bsf.GymMembership.infrastructure.presentation;
 
 import com.bsf.GymMembership.core.entity.Member;
 import com.bsf.GymMembership.core.entity.Plan;
-import com.bsf.GymMembership.core.usecases.member.CreateMemberCase;
-import com.bsf.GymMembership.core.usecases.member.DeleteMemberCase;
-import com.bsf.GymMembership.core.usecases.member.ListMemberCase;
-import com.bsf.GymMembership.core.usecases.member.UpdateMemberCase;
+import com.bsf.GymMembership.core.usecases.member.*;
 import com.bsf.GymMembership.infrastructure.persistence.dto.MemberDTO;
 import com.bsf.GymMembership.infrastructure.persistence.mapper.MemberDtoMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("member")
@@ -19,13 +18,15 @@ public class MemberController {
     private final UpdateMemberCase updateMemberCase;
     private final DeleteMemberCase deleteMemberCase;
     private final ListMemberCase listMemberCase;
+    private final ListAllMembersCase listAllMembersCase;
     private final MemberDtoMapper mapper;
 
-    public MemberController(CreateMemberCase createMemberCase, UpdateMemberCase updateMemberCase, DeleteMemberCase deleteMemberCase, ListMemberCase listMemberCase, MemberDtoMapper mapper) {
+    public MemberController(CreateMemberCase createMemberCase, UpdateMemberCase updateMemberCase, DeleteMemberCase deleteMemberCase, ListMemberCase listMemberCase, ListAllMembersCase listAllMembersCase, MemberDtoMapper mapper) {
         this.createMemberCase = createMemberCase;
         this.updateMemberCase = updateMemberCase;
         this.deleteMemberCase = deleteMemberCase;
         this.listMemberCase = listMemberCase;
+        this.listAllMembersCase = listAllMembersCase;
         this.mapper = mapper;
     }
     @PostMapping("create")
@@ -48,6 +49,13 @@ public class MemberController {
     @GetMapping("list/{memberId}")
     public MemberDTO listMemberById(@PathVariable UUID memberId){
         return mapper.toDto(listMemberCase.execute(memberId));
+    }
+    @GetMapping("listAll")
+    public List<MemberDTO> listAllMembers(){
+        return listAllMembersCase.execute()
+                .stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
 }

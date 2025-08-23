@@ -39,6 +39,7 @@ public class BeanConfiguration {
     public UpdateMemberCase updateMemberCase(MemberGateway memberGateway){
         return new UpdateMemberCaseImpl(memberGateway);
     }
+
     @Bean
     public ListMemberCase listMemberCase(MemberGateway memberGateway){
         return new ListMemberCaseImpl(memberGateway);
@@ -46,5 +47,9 @@ public class BeanConfiguration {
     @Bean
     public DeleteMemberCase deleteMemberCase(MemberGateway memberGateway){
         return new DeleteMemberCaseImpl(memberGateway);
+    }
+    @Bean
+    public ListAllMembersCase listAllMembersCase(MemberGateway memberGateway){
+        return new ListAllMembersCaseImpl(memberGateway);
     }
 }

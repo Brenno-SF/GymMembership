@@ -12,7 +12,9 @@ import com.bsf.GymMembership.infrastructure.persistence.repository.MemberReposit
 import com.bsf.GymMembership.infrastructure.persistence.repository.PlanRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class MemberRepositoryGateway implements MemberGateway {
@@ -72,6 +74,14 @@ public class MemberRepositoryGateway implements MemberGateway {
                 .orElseThrow(()-> new NotFoundException("Member Not Found"));
 
         return memberEntityMapper.toDomain(memberEntity);
+    }
+
+    @Override
+    public List<Member> listAllMember() {
+        return memberRepository.findAll()
+                .stream()
+                .map(memberEntityMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }
 
