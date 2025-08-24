@@ -3,10 +3,7 @@ package com.bsf.GymMembership.infrastructure.bean;
 import com.bsf.GymMembership.core.gateway.ClassGateway;
 import com.bsf.GymMembership.core.gateway.MemberGateway;
 import com.bsf.GymMembership.core.gateway.PlanGateway;
-import com.bsf.GymMembership.core.usecases.gymClass.CreateClassCase;
-import com.bsf.GymMembership.core.usecases.gymClass.CreateClassCaseImpl;
-import com.bsf.GymMembership.core.usecases.gymClass.ListAllClassesCase;
-import com.bsf.GymMembership.core.usecases.gymClass.ListAllClassesCaseImpl;
+import com.bsf.GymMembership.core.usecases.gymClass.*;
 import com.bsf.GymMembership.core.usecases.member.*;
 import com.bsf.GymMembership.core.usecases.plan.*;
 import org.springframework.context.annotation.Bean;
@@ -62,5 +59,9 @@ public class BeanConfiguration {
     @Bean
     public ListAllClassesCase listAllClassesCase(ClassGateway classGateway){
         return new ListAllClassesCaseImpl(classGateway);
+    }
+    @Bean
+    public ListClassCase listClassCase(ClassGateway classGateway){
+        return new ListClassCaseImpl(classGateway);
     }
 }
