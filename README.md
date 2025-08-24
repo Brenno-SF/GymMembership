@@ -137,7 +137,9 @@ spring:
 │   │   │               │   ├───gateway
 │   │   │               │   └───usecases
 │   │   │               │       ├───member
-│   │   │               │       └───plan
+│   │   │               │       ├───plan
+│   │   │               │       ├───class
+│   │   │               │       └───presence
 │   │   │               └───infrastructure
 │   │   │                   ├───bean
 │   │   │                   ├───exception
