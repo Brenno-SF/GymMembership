@@ -11,4 +11,5 @@ public interface ClassGateway {
     public List<GymClass> listAll();
     public Optional<GymClass> listById(UUID classId);
     public GymClass updateById(UUID classId,GymClass gymClass);
+    public void deleteById(UUID classId);
 }

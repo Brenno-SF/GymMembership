@@ -57,4 +57,12 @@ public class ClassRepositoryGateway implements ClassGateway {
         ClassEntity updatedEntity = classRepository.save(classEntity);
         return classEntityMapper.toDomain(updatedEntity);
     }
+
+    @Override
+    public void deleteById(UUID classId) {
+        ClassEntity classEntity = classRepository.findById(classId).orElseThrow(
+                () -> new NotFoundException("Class Not Found")
+        );
+        classRepository.deleteById(classId);
+    }
 }

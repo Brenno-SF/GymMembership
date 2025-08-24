@@ -68,4 +68,8 @@ public class BeanConfiguration {
     public UpdateClassCase updateClassCase(ClassGateway classGateway){
         return new UpdateClassCaseImpl(classGateway);
     }
+    @Bean
+    public DeleteClassCase deleteClassCase(ClassGateway classGateway){
+        return new DeleteClassCaseImpl(classGateway);
+    }
 }
