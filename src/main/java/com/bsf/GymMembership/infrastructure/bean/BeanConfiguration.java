@@ -64,4 +64,8 @@ public class BeanConfiguration {
     public ListClassCase listClassCase(ClassGateway classGateway){
         return new ListClassCaseImpl(classGateway);
     }
+    @Bean
+    public UpdateClassCase updateClassCase(ClassGateway classGateway){
+        return new UpdateClassCaseImpl(classGateway);
+    }
 }

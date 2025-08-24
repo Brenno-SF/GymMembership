@@ -4,6 +4,7 @@ import com.bsf.GymMembership.core.entity.GymClass;
 import com.bsf.GymMembership.core.usecases.gymClass.CreateClassCase;
 import com.bsf.GymMembership.core.usecases.gymClass.ListAllClassesCase;
 import com.bsf.GymMembership.core.usecases.gymClass.ListClassCase;
+import com.bsf.GymMembership.core.usecases.gymClass.UpdateClassCase;
 import com.bsf.GymMembership.infrastructure.exception.NotFoundException;
 import com.bsf.GymMembership.infrastructure.persistence.dto.ClassDTO;
 import com.bsf.GymMembership.infrastructure.persistence.mapper.ClassDtoMapper;
@@ -17,12 +18,14 @@ import java.util.stream.Collectors;
 @RequestMapping("class")
 public class ClassController {
     private final CreateClassCase createClassCase;
+    private final UpdateClassCase updateClassCase;
     private final ListAllClassesCase listAllClassesCase;
     private final ListClassCase listClassCase;
     private final ClassDtoMapper classDtoMapper;
 
-    public ClassController(CreateClassCase createClassCase, ListAllClassesCase listAllClassesCase, ListClassCase listClassCase, ClassDtoMapper classDtoMapper) {
+    public ClassController(CreateClassCase createClassCase, UpdateClassCase updateClassCase, ListAllClassesCase listAllClassesCase, ListClassCase listClassCase, ClassDtoMapper classDtoMapper) {
         this.createClassCase = createClassCase;
+        this.updateClassCase = updateClassCase;
         this.listAllClassesCase = listAllClassesCase;
         this.listClassCase = listClassCase;
         this.classDtoMapper = classDtoMapper;
@@ -43,5 +46,9 @@ public class ClassController {
     public ClassDTO listAllClasses(@PathVariable UUID classId){
         return classDtoMapper.toDto(listClassCase.execute(classId)
                 .orElseThrow(() -> new NotFoundException("Class Not Found")));
+    }
+    @PutMapping("update/{classId}")
+    public ClassDTO updateClass(@RequestBody ClassDTO classDTO, @PathVariable UUID classId){
+        return classDtoMapper.toDto(updateClassCase.execute(classId, classDtoMapper.toEntity(classDTO)));
     }
 }

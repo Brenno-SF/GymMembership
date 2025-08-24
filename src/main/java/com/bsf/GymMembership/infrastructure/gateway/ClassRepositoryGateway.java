@@ -43,4 +43,18 @@ public class ClassRepositoryGateway implements ClassGateway {
         return classRepository.findById(classId)
                 .map(classEntityMapper::toDomain);
     }
+
+    @Override
+    public GymClass updateById(UUID classId, GymClass gymClass) {
+        ClassEntity classEntity = classRepository.findById(classId).orElseThrow(
+                () -> new NotFoundException("Class Not Found")
+        );
+
+        classEntity.setNameClass(gymClass.name());
+        classEntity.setDescriptionClass(gymClass.description());
+        classEntity.setDateHour(gymClass.dateHour());
+
+        ClassEntity updatedEntity = classRepository.save(classEntity);
+        return classEntityMapper.toDomain(updatedEntity);
+    }
 }
