@@ -7,6 +7,9 @@ import com.bsf.GymMembership.infrastructure.persistence.mapper.ClassEntityMapper
 import com.bsf.GymMembership.infrastructure.persistence.repository.ClassRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ClassRepositoryGateway implements ClassGateway {
     private final ClassRepository classRepository;
@@ -21,5 +24,15 @@ public class ClassRepositoryGateway implements ClassGateway {
     public GymClass createClass(GymClass gymClass) {
         ClassEntity entity = classRepository.save(classEntityMapper.toEntity(gymClass));
         return classEntityMapper.toDomain(entity) ;
+    }
+
+    @Override
+    public List<GymClass> listAll() {
+        List<ClassEntity> classEntities = classRepository.findAll();
+
+        return classEntities.stream()
+                .map(classEntityMapper::toDomain)
+                .collect(Collectors.toList());
+
     }
 }
