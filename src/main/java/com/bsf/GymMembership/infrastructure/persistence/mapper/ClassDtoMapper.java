@@ -1,12 +1,12 @@
 package com.bsf.GymMembership.infrastructure.persistence.mapper;
-import com.bsf.GymMembership.core.entity.Class;
+import com.bsf.GymMembership.core.entity.GymClass;
 import com.bsf.GymMembership.infrastructure.persistence.dto.ClassDTO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClassDtoMapper {
-    public static Class toEntity(ClassDTO dto) {
-        return new Class(
+    public GymClass toEntity(ClassDTO dto) {
+        return new GymClass(
                 dto.classId(),
                 dto.name(),
                 dto.description(),
@@ -14,7 +14,7 @@ public class ClassDtoMapper {
         );
     }
 
-    public static ClassDTO toDto(Class entity) {
+    public ClassDTO toDto(GymClass entity) {
         return new ClassDTO(
                 entity.classId(),
                 entity.name(),
