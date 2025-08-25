@@ -15,6 +15,9 @@ import com.bsf.GymMembership.infrastructure.persistence.repository.PlanRepositor
 import com.bsf.GymMembership.infrastructure.persistence.repository.PresenceRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class PresenceRepositoryGateway implements PresenceGateway {
     private final PresenceRepository presenceRepository;
@@ -44,5 +47,11 @@ public class PresenceRepositoryGateway implements PresenceGateway {
         PresenceEntity newPresenceEntity = presenceRepository.save(presenceEntity);
 
         return presenceEntityMapper.toDomain(newPresenceEntity);
+    }
+
+    @Override
+    public Optional<Presence> listById(UUID presenceId) {
+        return presenceRepository.findById(presenceId)
+                .map(presenceEntityMapper::toDomain);
     }
 }

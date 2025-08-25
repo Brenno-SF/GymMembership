@@ -3,9 +3,14 @@ package com.bsf.GymMembership.infrastructure.bean;
 import com.bsf.GymMembership.core.gateway.ClassGateway;
 import com.bsf.GymMembership.core.gateway.MemberGateway;
 import com.bsf.GymMembership.core.gateway.PlanGateway;
+import com.bsf.GymMembership.core.gateway.PresenceGateway;
 import com.bsf.GymMembership.core.usecases.gymClass.*;
 import com.bsf.GymMembership.core.usecases.member.*;
 import com.bsf.GymMembership.core.usecases.plan.*;
+import com.bsf.GymMembership.core.usecases.presence.CreatePresenceCase;
+import com.bsf.GymMembership.core.usecases.presence.CreatePresenceCaseImpl;
+import com.bsf.GymMembership.core.usecases.presence.ListPresenceById;
+import com.bsf.GymMembership.core.usecases.presence.ListPresenceByIdImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -72,4 +77,14 @@ public class BeanConfiguration {
     public DeleteClassCase deleteClassCase(ClassGateway classGateway){
         return new DeleteClassCaseImpl(classGateway);
     }
+    @Bean
+    public CreatePresenceCase createPresenceCase(PresenceGateway presenceGateway){
+        return new CreatePresenceCaseImpl(presenceGateway);
+    }
+
+    @Bean
+    public ListPresenceById listPresenceById(PresenceGateway presenceGateway){
+        return new ListPresenceByIdImpl(presenceGateway);
+    }
+
 }
