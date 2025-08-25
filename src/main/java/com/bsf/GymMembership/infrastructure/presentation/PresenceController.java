@@ -1,6 +1,7 @@
 package com.bsf.GymMembership.infrastructure.presentation;
 
 import com.bsf.GymMembership.core.usecases.presence.CreatePresenceCase;
+import com.bsf.GymMembership.core.usecases.presence.ListPresenceByClassId;
 import com.bsf.GymMembership.core.usecases.presence.ListPresenceById;
 import com.bsf.GymMembership.core.usecases.presence.ListPresenceByMemberId;
 import com.bsf.GymMembership.infrastructure.exception.NotFoundException;
@@ -19,12 +20,14 @@ public class PresenceController {
     private final PresenceDtoMapper presenceDtoMapper;
     private final ListPresenceById listPresenceById;
     private final ListPresenceByMemberId listPresenceByMemberId;
+    private final ListPresenceByClassId listPresenceByClassId;
 
-    public PresenceController(CreatePresenceCase presenceCase, PresenceDtoMapper presenceDtoMapper, ListPresenceById listPresenceById, ListPresenceByMemberId listPresenceByMemberId) {
+    public PresenceController(CreatePresenceCase presenceCase, PresenceDtoMapper presenceDtoMapper, ListPresenceById listPresenceById, ListPresenceByMemberId listPresenceByMemberId, ListPresenceByClassId listPresenceByClassId) {
         this.presenceCase = presenceCase;
         this.presenceDtoMapper = presenceDtoMapper;
         this.listPresenceById = listPresenceById;
         this.listPresenceByMemberId = listPresenceByMemberId;
+        this.listPresenceByClassId = listPresenceByClassId;
     }
 
     @PostMapping("/create")
@@ -40,11 +43,19 @@ public class PresenceController {
                 listPresenceById.execute(presenceId).orElseThrow(()-> new NotFoundException("Presence Not found"))
         );
     }
-    @GetMapping("/list/{memberId}")
+    @GetMapping("/listByMember/{memberId}")
     public List<PresenceDTO> listPresenceByMember(@PathVariable UUID memberId){
         return listPresenceByMemberId.execute(memberId)
                 .stream()
                 .map(presenceDtoMapper::toDto)
                 .collect(Collectors.toList());
     }
+    @GetMapping("/listByClass/{classId}")
+    public List<PresenceDTO> listPresenceByClass(@PathVariable UUID classId){
+        return listPresenceByClassId.execute(classId)
+                .stream()
+                .map(presenceDtoMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }

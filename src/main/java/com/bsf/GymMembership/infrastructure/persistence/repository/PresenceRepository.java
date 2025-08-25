@@ -7,5 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PresenceRepository extends JpaRepository<PresenceEntity, UUID> {
-    public List<PresenceEntity> findAllByMemberId(UUID memberId);
+    List<PresenceEntity> findAllByMember_MemberId(UUID memberId);
+    List<PresenceEntity> findAllByGymClass_ClassId(UUID classId);
 }

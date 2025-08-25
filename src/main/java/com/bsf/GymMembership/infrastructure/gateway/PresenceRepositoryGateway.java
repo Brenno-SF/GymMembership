@@ -63,7 +63,19 @@ public class PresenceRepositoryGateway implements PresenceGateway {
                 ()-> new NotFoundException("Member Not Found")
         );
 
-        return presenceRepository.findAllByMemberId(memberId)
+        return presenceRepository.findAllByMember_MemberId(memberId)
+                .stream()
+                .map(presenceEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Presence> listByClassId(UUID classId) {
+        ClassEntity classEntity = classRepository.findById(classId).orElseThrow(
+                ()-> new NotFoundException("Class Not Found")
+        );
+
+        return presenceRepository.findAllByGymClass_ClassId(classId)
                 .stream()
                 .map(presenceEntityMapper::toDomain)
                 .collect(Collectors.toList());

@@ -7,10 +7,7 @@ import com.bsf.GymMembership.core.gateway.PresenceGateway;
 import com.bsf.GymMembership.core.usecases.gymClass.*;
 import com.bsf.GymMembership.core.usecases.member.*;
 import com.bsf.GymMembership.core.usecases.plan.*;
-import com.bsf.GymMembership.core.usecases.presence.CreatePresenceCase;
-import com.bsf.GymMembership.core.usecases.presence.CreatePresenceCaseImpl;
-import com.bsf.GymMembership.core.usecases.presence.ListPresenceById;
-import com.bsf.GymMembership.core.usecases.presence.ListPresenceByIdImpl;
+import com.bsf.GymMembership.core.usecases.presence.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -85,6 +82,14 @@ public class BeanConfiguration {
     @Bean
     public ListPresenceById listPresenceById(PresenceGateway presenceGateway){
         return new ListPresenceByIdImpl(presenceGateway);
+    }
+    @Bean
+    public ListPresenceByMemberId listPresenceByMemberId(PresenceGateway presenceGateway){
+        return new ListPresenceByMemberIdImpl(presenceGateway);
+    }
+    @Bean
+    public ListPresenceByClassId listPresenceByClassId(PresenceGateway presenceGateway){
+        return new ListPresenceByClassIdImpl(presenceGateway);
     }
 
 }

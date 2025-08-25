@@ -10,5 +10,6 @@ public interface PresenceGateway {
     public Presence createPresence(Presence presence);
     public Optional<Presence> listById(UUID presenceId);
     public List<Presence> listByMemberId(UUID memberId);
+    public List<Presence> listByClassId(UUID memberId);
 
 }
