@@ -15,8 +15,10 @@ import com.bsf.GymMembership.infrastructure.persistence.repository.PlanRepositor
 import com.bsf.GymMembership.infrastructure.persistence.repository.PresenceRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class PresenceRepositoryGateway implements PresenceGateway {
@@ -53,5 +55,17 @@ public class PresenceRepositoryGateway implements PresenceGateway {
     public Optional<Presence> listById(UUID presenceId) {
         return presenceRepository.findById(presenceId)
                 .map(presenceEntityMapper::toDomain);
+    }
+
+    @Override
+    public List<Presence> listByMemberId(UUID memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(
+                ()-> new NotFoundException("Member Not Found")
+        );
+
+        return presenceRepository.findAllByMemberId(memberId)
+                .stream()
+                .map(presenceEntityMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }
