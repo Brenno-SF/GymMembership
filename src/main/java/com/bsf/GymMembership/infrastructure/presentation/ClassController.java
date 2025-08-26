@@ -5,6 +5,8 @@ import com.bsf.GymMembership.core.usecases.gymClass.*;
 import com.bsf.GymMembership.infrastructure.exception.NotFoundException;
 import com.bsf.GymMembership.infrastructure.persistence.dto.ClassDTO;
 import com.bsf.GymMembership.infrastructure.persistence.mapper.ClassDtoMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +33,8 @@ public class ClassController {
     }
 
     @PostMapping("create")
-    public ClassDTO createClass(@RequestBody ClassDTO classDTO){
-        return classDtoMapper.toDto(createClassCase.execute(classDtoMapper.toEntity(classDTO)));
+    public ResponseEntity<ClassDTO> createClass(@RequestBody ClassDTO classDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(classDtoMapper.toDto(createClassCase.execute(classDtoMapper.toEntity(classDTO))));
     }
     @GetMapping("listAll")
     public List<ClassDTO> listAllClasses(){
@@ -42,16 +44,18 @@ public class ClassController {
                 .collect(Collectors.toList());
     }
     @GetMapping("list/{classId}")
-    public ClassDTO listAllClasses(@PathVariable UUID classId){
-        return classDtoMapper.toDto(listClassCase.execute(classId)
-                .orElseThrow(() -> new NotFoundException("Class Not Found")));
+    public ResponseEntity<ClassDTO> listAllClasses(@PathVariable UUID classId){
+        return ResponseEntity.ok(classDtoMapper.toDto(listClassCase.execute(classId)
+                .orElseThrow(() -> new NotFoundException("Class Not Found"))));
     }
     @PutMapping("update/{classId}")
-    public ClassDTO updateClass(@RequestBody ClassDTO classDTO, @PathVariable UUID classId){
-        return classDtoMapper.toDto(updateClassCase.execute(classId, classDtoMapper.toEntity(classDTO)));
+    public ResponseEntity<ClassDTO> updateClass(@RequestBody ClassDTO classDTO, @PathVariable UUID classId){
+        return ResponseEntity.ok(classDtoMapper.toDto(updateClassCase.execute(classId, classDtoMapper.toEntity(classDTO))));
     }
     @DeleteMapping("delete/{classId}")
-    public void deleteClass( @PathVariable UUID classId){
+    public ResponseEntity<Void> deleteClass( @PathVariable UUID classId){
         deleteClassCase.execute(classId);
+        return ResponseEntity.noContent()
+                .build();
     }
 }
