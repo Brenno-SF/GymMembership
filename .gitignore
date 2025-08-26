@@ -33,4 +33,5 @@ build/
 .vscode/
 
 compose.yaml
-src/main/resources/application.yml
+*yml
+D:\Documentos\Repositório\java\GymMembership\src\main\resources\application.yml
