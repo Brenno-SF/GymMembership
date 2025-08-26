@@ -5,6 +5,7 @@ import com.bsf.GymMembership.core.usecases.plan.*;
 import com.bsf.GymMembership.infrastructure.exception.NotFoundException;
 import com.bsf.GymMembership.infrastructure.persistence.dto.PlanDTO;
 import com.bsf.GymMembership.infrastructure.persistence.mapper.PlanDtoMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,28 +33,28 @@ public class PlanController {
         this.updatePlanCase = updatePlanCase;
     }
     @PostMapping("create")
-    public PlanDTO createPlan(@RequestBody PlanDTO planDTO){
+    public ResponseEntity<PlanDTO> createPlan(@RequestBody PlanDTO planDTO){
         Plan newPlan = createPlanCase.execute(planDtoMapper.toEntity(planDTO));
-        return planDtoMapper.toDto(newPlan);
+        return ResponseEntity.status(HttpStatus.CREATED).body(planDtoMapper.toDto(newPlan));
     }
     @GetMapping("listAll")
-    public List<PlanDTO>listAllPlan(){
-        return listPlanCase.execute()
+    public ResponseEntity<List<PlanDTO>>listAllPlan(){
+        return ResponseEntity.ok(listPlanCase.execute()
                 .stream()
                 .map(planDtoMapper::toDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
     @GetMapping("listByPlan/{plan}")
-    public PlanDTO listByPlan(@PathVariable String plan){
-        return listByPlanCase.execute(plan)
+    public ResponseEntity<PlanDTO> listByPlan(@PathVariable String plan){
+        return  ResponseEntity.ok(listByPlanCase.execute(plan)
                 .map(planDtoMapper::toDto)
-                .orElseThrow((()-> new NotFoundException("Plan with name: "+ plan +" not found")));
+                .orElseThrow((()-> new NotFoundException("Plan with name: "+ plan +" not found"))));
     }
 
     @PutMapping("update/{planId}")
-    public PlanDTO createPlan(@RequestBody PlanDTO planDTO, @PathVariable UUID planId){
+    public ResponseEntity<PlanDTO> updatePlan(@RequestBody PlanDTO planDTO, @PathVariable UUID planId){
         Plan plan = updatePlanCase.execute(planId, planDtoMapper.toEntity(planDTO));
-        return planDtoMapper.toDto(plan);
+        return ResponseEntity.ok(planDtoMapper.toDto(plan));
     }
 
     @DeleteMapping("delete/{planId}")
