@@ -32,12 +32,6 @@ jobs:
         with:
           name: app-jar
 
-      - name: Start ssh-agent
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-          ssh-passphrase: ${{ secrets.EC2_SSH_PASSPHRASE }}
-
       - uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
