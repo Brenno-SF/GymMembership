@@ -1,4 +1,4 @@
-name: CI/CD Pipeline #pipeline for deploying to EC2
+name: CI/CD Pipeline #pipeline for deploying to EC2 instance
 
 on:
   push:
