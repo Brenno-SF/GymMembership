@@ -1,4 +1,4 @@
-name: CI/CD Pipeline #pipeline para deploy na AWS EC2 da minha aplicação Java Spring Boot
+name: CI/CD Pipeline #pipeline for deploying to EC2
 
 on:
   push:
