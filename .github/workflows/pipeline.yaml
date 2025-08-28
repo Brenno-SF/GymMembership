@@ -1,4 +1,4 @@
-name: CI/CD Pipeline #pipeline para deploy na AWS EC2
+name: CI/CD Pipeline #pipeline para deploy na AWS EC2 da minha aplicação Java Spring Boot
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
         with:
           name: app-jar
 
-      - run: ls -lR app-jar
+#      - run: ls -lR app-jar
 
       - uses: appleboy/scp-action@v0.1.7
         with:
