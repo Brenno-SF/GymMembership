@@ -31,6 +31,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: app-jar
+          path: app-jar
 
       - run: ls -lR app-jar  # debugging line to list contents
 
