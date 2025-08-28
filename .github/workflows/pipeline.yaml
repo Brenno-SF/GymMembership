@@ -32,6 +32,8 @@ jobs:
         with:
           name: app-jar
 
+      - run: ls -lR app-jar
+
       - uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
