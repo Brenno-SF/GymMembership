@@ -62,4 +62,6 @@ public class PlanController {
         deletePlanCase.execute(planId);
         return ResponseEntity.noContent().build();
     }
+
 }
+
