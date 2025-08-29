@@ -17,7 +17,7 @@ jobs:
           java-version: '21'
 
 #      - run: mvn clean verify
-      - run: mvn package -DskipTests
+      - run: mvn clean package -DskipTests
 
       - uses: actions/upload-artifact@v4
         with:
@@ -42,7 +42,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           passphrase: ${{ secrets.EC2_SSH_PASSPHRASE }}
           source: "app-jar/GymMembership-0.0.1-SNAPSHOT.jar"
-          target: "/home/ec2-user/app/GymMembership-0.0.1-SNAPSHOT.jar"
+          target: "/home/ec2-user/app/"
 
 
       - uses: appleboy/ssh-action@v0.1.10
