@@ -33,7 +33,7 @@ jobs:
           name: app-jar
           path: .
 
-      - run: ls -lR app-jar  # debugging line to list contents
+      #- run: ls -lR app-jar  # debugging line to list contents
 
       - uses: appleboy/scp-action@v0.1.7
         with:
