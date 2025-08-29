@@ -54,5 +54,5 @@ jobs:
           script_stop: false
           script: |
             pkill -f 'GymMembership-0.0.1-SNAPSHOT.jar' || true
-            nohup java -jar /home/ec2-user/app/GymMembership-0.0.1-SNAPSHOT.jar > /home/ec2-user/app/app.log 2>&1 &
+            nohup java -jar /home/ec2-user/app/app-jar/GymMembership-0.0.1-SNAPSHOT.jar > /home/ec2-user/app/app.log 2>&1 &
 
