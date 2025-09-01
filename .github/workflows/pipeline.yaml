@@ -53,9 +53,6 @@ jobs:
           passphrase: ${{ secrets.EC2_SSH_PASSPHRASE }}
           script_stop: false
           script: |
-            pkill -f 'GymMembership' || true
-            nohup java -jar \
-              -Dspring.datasource.url="$DB_URL" \
-              -Dspring.datasource.username="$DB_USERNAME" \
-              -Dspring.datasource.password="$DB_PASSWORD" \
-              /home/ec2-user/app/app-jar/GymMembership-0.0.1-SNAPSHOT.jar > /home/ec2-user/app/app.log 2>&1 & disown
+            sudo systemctl restart gym
+            sleep 5
+            sudo systemctl status gym --no-pager
