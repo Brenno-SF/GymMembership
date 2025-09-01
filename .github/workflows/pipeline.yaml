@@ -53,19 +53,10 @@ jobs:
           passphrase: ${{ secrets.EC2_SSH_PASSPHRASE }}
           script_stop: false
           script: |
-            echo "Parando app anterior se existir..."
             pkill -f 'GymMembership' || true
-
-            echo "Pegando último JAR enviado..."
             JAR_NAME=$(ls /home/ec2-user/app/*.jar | tail -n 1)
-
-            echo "Iniciando app com variáveis do banco..."
-            export DB_URL="${{ secrets.DB_URL }}"
-            export DB_USERNAME="${{ secrets.DB_USERNAME }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-
             nohup java -jar \
-              -Dspring.datasource.url=$DB_URL \
-              -Dspring.datasource.username=$DB_USERNAME \
-              -Dspring.datasource.password=$DB_PASSWORD \
+              -Dspring.datasource.url="$DB_URL" \
+              -Dspring.datasource.username="$DB_USERNAME" \
+              -Dspring.datasource.password="$DB_PASSWORD" \
               $JAR_NAME > /home/ec2-user/app/app.log 2>&1 &
