@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-jar
-          path: target/*.jar   # pega o jar gerado, independente da versão
+          path: target/*.jar  # ajustado para pegar o jar gerado
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           passphrase: ${{ secrets.EC2_SSH_PASSPHRASE }}
-          source: "./app-jar/*.jar"   # pega o jar baixado
+          source: "./app-jar/*.jar"   # ajustado para pegar o jar baixado
           target: "/home/ec2-user/app/"
 
       - name: Restart App on EC2
